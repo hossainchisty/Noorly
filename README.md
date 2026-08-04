@@ -1,50 +1,84 @@
-# Welcome to your Expo app 👋
+# Noorly 🌙
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Noorly** is a full-featured Islamic lifestyle companion built with **Expo / React Native**. It brings your daily worship essentials together in one beautiful, offline-friendly app — prayer times, the Holy Quran with translations and tafsir, duas, Qibla direction, digital tasbeeh, an Islamic/Hijri calendar, and a mosque finder.
 
-## Get started
+---
 
-1. Install dependencies
+## ✨ Features
 
-   ```bash
-   npm install
-   ```
+- 🕌 **Prayer Times** — accurate daily timings powered by 4 calculation methods, with a live countdown ring, 24h/12h clock, and prayer reminders.
+- 📗 **Quran Reader** — Arabic text (Uthmani script) with 10+ translation editions, 6 tafsir editions, per-ayah audio recitation from 6 world-renowned qaris, bookmarks, and continue-reading.
+- 🤲 **Duas** — a curated collection of daily supplications organized by category with favorites.
+- 🧭 **Qibla** — real-time compass showing the direction of the Kaaba with distance.
+- 📿 **Tasbeeh** — digital counter for dhikr with haptic feedback.
+- 📅 **Hijri Calendar** — Islamic dates and occasions.
+- 🕌 **Mosque Finder** — discover nearby mosques on an interactive map with directions.
+- 🌍 **Multilingual RTL-ready** — English, Arabic, and Bengali with full RTL layout support.
+- 🌗 **Theming** — light / dark / system appearance with a cohesive emerald palette.
+- 💎 **Premium** — in-app premium tier (Plausible privacy-respecting setup).
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 📸 Demo
 
-In the output, you'll find options to open the app in a
+| | | | |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screenshot/home.png" width="240" alt="Home screen"/> | <img src="assets/screenshot/quran-reader.png" width="240" alt="Quran reader"/> | <img src="assets/screenshot/quran.png" width="240" alt="Quran"/> | <img src="assets/screenshot/duas.png" width="240" alt="Duas"/> |
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+| | | | |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screenshot/qibla.png" width="240" alt="Qibla"/> | <img src="assets/screenshot/mosque-finder.png" width="240" alt="Mosque finder"/> | <img src="assets/screenshot/tasbeeh.png" width="240" alt="Tasbeeh"/> | <img src="assets/screenshot/calendar.png" width="240" alt="Calendar"/> |
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+> Screenshots live in [`assets/screenshot/`](assets/screenshot/).
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 🔌 API Providers
+
+Noorly stays **free** and **keyless** by relying on open, public APIs:
+
+| Service | Base URL | Used For |
+|:--------|:---------|:---------|
+| [AlAdhan](https://aladhan.com/prayer-times-api) | `https://api.aladhan.com/v1` | Prayer times, Gregorian/Hijri calendar |
+| [AlQuran Cloud](https://alquran.cloud) | `https://api.alquran.cloud/v1` | Quran text, translations, tafsir editions |
+| [UmmahAPI](https://www.ummahapi.com) | `https://www.ummahapi.com/api/duas` | Dua collections |
+| [OpenStreetMap Nominatim](https://nominatim.org/) | `https://nominatim.openstreetmap.org/search` | Location geocoding / reverse geocoding |
+| [Overpass API](https://overpass-api.de/) | `https://overpass-api.de/api/interpreter` | Nearby mosque (POI) queries |
+| [Islamic Network CDN](https://cdn.islamic.network) | `https://cdn.islamic.network/quran/audio` | Quran audio (MP3 per ayah) |
+| [EveryAyah](https://everyayah.com) | `https://everyayah.com/data` | Per-ayah audio (multiple reciters) |
+
+All requests include timeout/abort handling and graceful offline fallbacks (embedded surah list, cached data).
+
+---
+
+## 🚀 Getting Started
+
+**Prerequisites:** Node.js 18+, npm, and the [Expo](https://docs.expo.dev) CLI. iOS/Android SDKs only needed for native devices.
 
 ```bash
-npm run reset-project
+# 1. Install dependencies
+npm install
+
+# 2. Start the dev server
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+From the terminal output you can open the app on:
 
-## Learn more
+- **iOS Simulator** — press `i`
+- **Android Emulator** — press `a`
+- **Web** — press `w`
+- **Expo Go** — scan the QR code with your device
 
-To learn more about developing your project with Expo, look at the following resources:
+> This project uses file-based routing via **Expo Router**. Edit screens under the `app/` directory.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## 🛠 Tech Stack
 
-Join our community of developers creating universal apps.
+- **Expo SDK 54** · Expo Router · React Native 0.81 · React 19
+- **Zustand** (state & persistence) · **react-i18next** (i18n, RTL)
+- **react-native-reanimated** · **expo-sensors** · **react-native-maps** · **expo-audio**
+- **expo-location** · **expo-notifications** · **expo-haptics** · **expo-linear-gradient**
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
