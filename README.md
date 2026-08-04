@@ -23,11 +23,11 @@
 
 | | | | |
 |:---:|:---:|:---:|:---:|
-| <img src="assets/screenshot/home.png" width="240" alt="Home screen"/> | <img src="assets/screenshot/quran-reader.png" width="240" alt="Quran reader"/> | <img src="assets/screenshot/quran.png" width="240" alt="Quran"/> | <img src="assets/screenshot/duas.png" width="240" alt="Duas"/> |
+| <img src="assets/screenshot/qibla.png" width="240" alt="Qibla"/>| <img src="assets/screenshot/quran-reader.png" width="240" alt="Quran reader"/> | <img src="assets/screenshot/quran.png" width="240" alt="Quran"/> |
 
 | | | | |
 |:---:|:---:|:---:|:---:|
-| <img src="assets/screenshot/qibla.png" width="240" alt="Qibla"/> | <img src="assets/screenshot/mosque-finder.png" width="240" alt="Mosque finder"/> | <img src="assets/screenshot/tasbeeh.png" width="240" alt="Tasbeeh"/> | <img src="assets/screenshot/calendar.png" width="240" alt="Calendar"/> |
+|  | <img src="assets/screenshot/mosque-finder.png" width="240" alt="Mosque finder"/> | <img src="assets/screenshot/tasbeeh.png" width="240" alt="Tasbeeh"/> | <img src="assets/screenshot/calendar.png" width="240" alt="Calendar"/> |
 
 > Screenshots live in [`assets/screenshot/`](assets/screenshot/).
 
