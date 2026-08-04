@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, router } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -194,10 +194,7 @@ export default function QuranReaderScreen() {
           current={reciter}
           onSelect={(id) => useQuranStore.getState().setReciter(id)}
         />
-        <TranslationPicker
-          current={translationLanguage}
-          onSelect={(id) => useQuranStore.getState().setTranslationLanguage(id)}
-        />
+        <TranslationPicker current={translationLanguage} />
         <TafsirPicker current={tafsirEdition} onSelect={setTafsirEdition} />
       </View>
 
@@ -360,27 +357,11 @@ function ReciterPicker({ current, onSelect }: { current: string; onSelect: (id: 
   );
 }
 
-function TranslationPicker({
-  current,
-  onSelect,
-}: {
-  current: string;
-  onSelect: (id: string) => void;
-}) {
-  const { t } = useTranslation();
+function TranslationPicker({ current }: { current: string }) {
   const { colors } = useAppTheme();
   return (
     <Pressable
-      onPress={() =>
-        Alert.alert(t('quran.translation'), undefined, [
-          ...TRANSLATIONS.map((tr) => ({
-            text: tr.name,
-            onPress: () => onSelect(tr.id),
-            style: tr.id === current ? ('destructive' as const) : ('default' as const),
-          })),
-          { text: t('common.cancel'), style: 'cancel' },
-        ])
-      }
+      onPress={() => router.push('/quran/translations' as never)}
       style={[styles.settingsPill, { backgroundColor: colors.surface, borderColor: colors.border }]}>
       <Icon name="language-outline" size={16} color={colors.textMuted} />
       <ThemedText variant="caption" numberOfLines={1} style={{ maxWidth: 140 }}>

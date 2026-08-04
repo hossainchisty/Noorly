@@ -8,6 +8,7 @@ export default function QuranLayout() {
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="[surah]" />
       <Stack.Screen name="bookmarks" />
+      <Stack.Screen name="translations" options={{ title: 'Translations' }} />
     </ThemedStack>
   );
 }
