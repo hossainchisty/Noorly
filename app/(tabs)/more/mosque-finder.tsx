@@ -142,7 +142,6 @@ export default function MosqueFinderScreen() {
                       ) : null}
                       {m.phone ? (
                         <ThemedText variant="caption" color="muted">
-                          <Icon name="phone-outline" size={14} color="muted" />
                           {m.phone}
                         </ThemedText>
                       ) : null}

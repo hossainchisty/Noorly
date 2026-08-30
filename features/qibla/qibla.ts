@@ -39,9 +39,56 @@ export function getDistanceKm(latitude: number, longitude: number): number {
  * Get the relative angle between the device heading and the Qibla direction.
  * Returns a positive value if the Qibla is to the right, negative if to the left.
  */
-export function getQiblaRelativeAngle(deviceHeading: number, latitude: number, longitude: number): number {
-  const qiblaBearing = getQiblaBearing(latitude, longitude);
-  return relativeAngleDiff(qiblaBearing, deviceHeading);
+export function getHeadingFromSensors(
+  magnetometer: { x: number; y: number; z: number },
+  accelerometer?: { x: number; y: number; z: number } | null,
+): number {
+  const { x: mx, y: my, z: mz } = magnetometer;
+
+  if (mx === undefined || my === undefined || mz === undefined || mx === null || my === null || mz === null) {
+    return NaN;
+  }
+
+  if (!accelerometer) {
+    let heading = Math.atan2(-mx, my) * RAD;
+    return (heading + 360) % 360;
+  }
+
+  const { x: gx, y: gy, z: gz } = accelerometer;
+
+  if (gx === undefined || gy === undefined || gz === undefined || gx === null || gy === null || gz === null) {
+    // Fall back to magnetometer-only heading
+    let heading = Math.atan2(-mx, my) * RAD;
+    return (heading + 360) % 360;
+  }
+
+  // Avoid division by zero
+  const magNorm = Math.sqrt(gy * gy + gz * gz);
+  const pitch = Math.atan2(-gx, magNorm !== 0 ? magNorm : 1);
+  const roll = Math.atan2(gy === undefined || gz === undefined ? 0 : gy, gz === undefined ? 1 : gz);
+
+  // Rotate magnetic vector by pitch and roll for tilt compensation
+  const cx = mx * Math.cos(pitch) + mz * Math.sin(pitch);
+  const cy =
+    mx * Math.sin(roll) * Math.sin(pitch) +
+    my * Math.cos(roll) -
+    (mz === undefined ? 0 : mz) * Math.sin(roll) * Math.cos(pitch);
+
+  if (cx === undefined || cy === undefined || cx === null || cy === null) {
+    // Fall back to magnetometer-only heading
+    let heading = Math.atan2(-mx, my) * RAD;
+    return (heading + 360) % 360;
+  }
+
+  let heading = Math.atan2(-cy, cx) * RAD;
+  return (heading + 360) % 360;
+}
+
+export function relativeAngleDiff(from: number, to: number): number {
+  let diff = (to - from) % 360;
+  if (diff > 180) diff -= 360;
+  if (diff < -180) diff += 360;
+  return diff;
 }
 
 /**

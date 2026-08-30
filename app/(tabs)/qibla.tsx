@@ -320,7 +320,7 @@ function Cardinal() {
   );
 }
 
-function KaabaIcon({ size = 40, color = 'accent' }: { size: number; color: string }) {
+function KaabaIcon({ size = 40, color = 'primary' }: { size: number; color: 'primary' | 'accent' | 'muted' | 'success' }) {
   return (
     <View style={styles.kaabaContainer}>
       <ThemedText variant="caption" bold color={color}>
