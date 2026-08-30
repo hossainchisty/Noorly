@@ -174,6 +174,7 @@ export const en = {
     list: 'List',
     map: 'Map',
     showWithin: 'Showing mosques within {{km}} km',
+    capacity: 'Capacity: {{capacity}}',
   },
   calendar: {
     title: 'Calendar',

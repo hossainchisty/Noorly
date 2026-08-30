@@ -9,6 +9,10 @@ export type Mosque = {
   latitude: number;
   longitude: number;
   address?: string | null;
+  phone?: string | null;
+  website?: string | null;
+  capacity?: number | null;
+  wheelchairAccessible?: boolean | null;
 };
 
 type OverpassElement = {

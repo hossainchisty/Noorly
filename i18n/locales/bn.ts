@@ -176,6 +176,7 @@ export const bn: Locale = {
     list: 'তালিকা',
     map: 'ম্যাপ',
     showWithin: '{{km}} কিমির মধ্যে মসজিদ দেখানো হচ্ছে',
+    capacity: 'ক্ষমতা: {{capacity}}',
   },
   calendar: {
     title: 'ক্যালেন্ডার',

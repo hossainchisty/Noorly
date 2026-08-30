@@ -140,6 +140,23 @@ export default function MosqueFinderScreen() {
                           {m.address}
                         </ThemedText>
                       ) : null}
+                      {m.phone ? (
+                        <ThemedText variant="caption" color="muted">
+                          <Icon name="phone-outline" size={14} color="muted" />
+                          {m.phone}
+                        </ThemedText>
+                      ) : null}
+                      {m.website ? (
+                        <ThemedText variant="caption" color="muted">
+                          <Icon name="globe-outline" size={14} color="muted" />
+                          {m.website}
+                        </ThemedText>
+                      ) : null}
+                      {m.capacity !== undefined && m.capacity !== null ? (
+                        <ThemedText variant="caption" color="muted">
+                          {t('mosqueFinder.capacity', { capacity: m.capacity }) }
+                        </ThemedText>
+                      ) : null}
                       <ThemedText variant="caption" color="muted">
                         {dist < 1000
                           ? t('mosqueFinder.distanceM', { distance: Math.round(dist) })

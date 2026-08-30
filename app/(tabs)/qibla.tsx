@@ -18,7 +18,7 @@ import { getCurrentLocation } from '@/features/location/location';
 import {
   getDistanceKm,
   getHeadingFromSensors,
-  getQiblaBearing,
+  getQiblaInfo,
   relativeAngleDiff,
 } from '@/features/qibla/qibla';
 import { useAppTheme } from '@/hooks/use-app-theme';
@@ -43,6 +43,7 @@ export default function QiblaScreen() {
 
   const magRef = useRef<{ x: number; y: number; z: number } | null>(null);
   const accelRef = useRef<{ x: number; y: number; z: number } | null>(null);
+  const qiblaInfoRef = useRef<{ distance: number; bearing: number } | null>(null);
 
   useEffect(() => {
     let magSub: { remove(): void } | undefined;
@@ -59,7 +60,9 @@ export default function QiblaScreen() {
       }
       if (loc) {
         setLocation({ latitude: loc.latitude, longitude: loc.longitude });
-        setQibla(getQiblaBearing(loc.latitude, loc.longitude));
+        const info = getQiblaInfo(loc.latitude, loc.longitude);
+        setQibla(info.bearing);
+        qiblaInfoRef.current = info;
       }
 
       const magnetometerOk = await Magnetometer.isAvailableAsync();
@@ -73,6 +76,9 @@ export default function QiblaScreen() {
       DeviceMotion.setUpdateInterval(100);
       magSub = Magnetometer.addListener((m) => {
         magRef.current = m;
+        if (qiblaInfoRef.current && magRef.current) {
+          // Heading computed in tick interval
+        }
       });
       accelSub = DeviceMotion.addListener((m) => {
         accelRef.current = m.accelerationIncludingGravity;
@@ -81,13 +87,12 @@ export default function QiblaScreen() {
     })();
 
     const tick = setInterval(() => {
-      if (magRef.current) {
-        setHeading((prev) => {
-          const next = getHeadingFromSensors(magRef.current!, accelRef.current);
-          return Math.abs(next - prev) > 180 ? prev : next;
-        });
+      if (magRef.current && qiblaInfoRef.current) {
+        const heading = getHeadingFromSensors(magRef.current, accelRef.current);
+        setHeading(heading);
+        setQibla(qiblaInfoRef.current.bearing);
       }
-    }, 120);
+    }, 100);
 
     return () => {
       magSub?.remove();
@@ -149,6 +154,7 @@ export default function QiblaScreen() {
               ]}>
               <Animated.View style={[styles.rose, roseStyle]}>
                 <Cardinal />
+                <KaabaIcon size={60} color={colors.accent} />
               </Animated.View>
               <Animated.View style={[styles.needle, needleStyle]}>
                 <View style={[styles.needleHead, { backgroundColor: colors.accent }]} />
@@ -314,6 +320,16 @@ function Cardinal() {
   );
 }
 
+function KaabaIcon({ size = 40, color = 'accent' }: { size: number; color: string }) {
+  return (
+    <View style={styles.kaabaContainer}>
+      <ThemedText variant="caption" bold color={color}>
+        🕋
+      </ThemedText>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   compassWrap: {
     alignItems: 'center',
@@ -371,6 +387,13 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     shadowOffset: { width: 0, height: 1 },
     elevation: 2,
+  },
+  kaabaContainer: {
+    position: 'absolute',
+    bottom: 20,
+    alignItems: 'center',
+    width: 40,
+    height: 40,
   },
   fixedMarker: {
     position: 'absolute',

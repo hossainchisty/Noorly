@@ -176,6 +176,7 @@ export const ar: Locale = {
     list: 'قائمة',
     map: 'خريطة',
     showWithin: 'عرض المساجد ضمن {{km}} كم',
+    capacity: 'السعة: {{capacity}}',
   },
   calendar: {
     title: 'التقويم',
