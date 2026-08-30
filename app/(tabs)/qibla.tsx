@@ -154,7 +154,7 @@ export default function QiblaScreen() {
               ]}>
               <Animated.View style={[styles.rose, roseStyle]}>
                 <Cardinal />
-                <KaabaIcon size={60} color={colors.accent} />
+                <KaabaIcon size={60} color="accent" />
               </Animated.View>
               <Animated.View style={[styles.needle, needleStyle]}>
                 <View style={[styles.needleHead, { backgroundColor: colors.accent }]} />
@@ -293,22 +293,22 @@ function MapToggleButton({ label, onPress }: { label: string; onPress: () => voi
 function Cardinal() {
   return (
     <View style={styles.roseInner}>
-      <View style={[styles.cardinalTick, { top: -36 }]}>
+      <View style={[styles.cardinalTick, { top: -44 }]}>
         <ThemedText variant="caption" bold color="muted">
           N
         </ThemedText>
       </View>
-      <View style={[styles.cardinalTick, { bottom: -36 }]}>
+      <View style={[styles.cardinalTick, { bottom: -44 }]}>
         <ThemedText variant="caption" bold color="muted">
           S
         </ThemedText>
       </View>
-      <View style={[styles.cardinalTick, { left: -36 }]}>
+      <View style={[styles.cardinalTick, { left: -44 }]}>
         <ThemedText variant="caption" bold color="muted">
           W
         </ThemedText>
       </View>
-      <View style={[styles.cardinalTick, { right: -36 }]}>
+      <View style={[styles.cardinalTick, { right: -44 }]}>
         <ThemedText variant="caption" bold color="muted">
           E
         </ThemedText>
@@ -320,7 +320,7 @@ function Cardinal() {
   );
 }
 
-function KaabaIcon({ size = 40, color = 'primary' }: { size: number; color: 'primary' | 'accent' | 'muted' | 'success' }) {
+function KaabaIcon({ size = 40, color = 'accent' }: { size: number; color: 'primary' | 'accent' | 'muted' | 'success' }) {
   return (
     <View style={styles.kaabaContainer}>
       <ThemedText variant="caption" bold color={color}>
@@ -352,12 +352,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   roseInner: {
-    width: 220,
-    height: 220,
-    borderRadius: 110,
-    borderWidth: 1,
-    borderColor: '#9999',
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    borderWidth: 2,
+    borderColor: '#999999',
     position: 'relative',
+    backgroundColor: '#FFFFFF',
   },
   cardinalTick: {
     position: 'absolute',
@@ -365,8 +366,14 @@ const styles = StyleSheet.create({
   },
   qiblaTick: {
     position: 'absolute',
-    top: 2,
+    top: 0,
     alignSelf: 'center',
+    marginTop: -20,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#FFD700',
+    justifyContent: 'center',
   },
   needle: {
     position: 'absolute',
@@ -390,10 +397,14 @@ const styles = StyleSheet.create({
   },
   kaabaContainer: {
     position: 'absolute',
-    bottom: 20,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     alignItems: 'center',
-    width: 40,
-    height: 40,
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
   },
   fixedMarker: {
     position: 'absolute',
