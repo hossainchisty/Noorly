@@ -1,4 +1,5 @@
-# Noorly 🌙
+# <img width="35" height="35" alt="logo" src="https://github.com/user-attachments/assets/542bee69-ec4c-4a77-8a89-e0deb01a8408" /> Noorly 
+
 
 **Noorly** is a full-featured Islamic lifestyle companion built with **Expo / React Native**. It brings your daily worship essentials together in one beautiful, offline-friendly app — prayer times, the Holy Quran with translations and tafsir, duas, Qibla direction, digital tasbeeh, an Islamic/Hijri calendar, and a mosque finder.
 
